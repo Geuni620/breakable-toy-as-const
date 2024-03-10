@@ -2,9 +2,11 @@ import 'src/index.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Toaster } from 'sonner';
+// import { Toaster } from 'sonner';
 import { App } from 'src/App';
 import { QueryProvider } from 'src/components/common/QueryProvider';
+
+import { Toaster } from '@/components/ui/toaster';
 
 async function enableMocking() {
   if (process.env.NODE_ENV !== 'development') {
