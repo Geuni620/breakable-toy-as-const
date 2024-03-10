@@ -12,11 +12,21 @@ import {
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { toast } from '@/components/ui/use-toast';
 
-const notificationTypes = ['all', 'mentions', 'none'] as const;
-type NotificationType = (typeof notificationTypes)[number];
+// const notificationTypes = ['all', 'mentions', 'none'] as const;
+// type NotificationType = (typeof notificationTypes)[number];
+
+const notificationSettings = {
+  all: 'all',
+  mentions: 'mentions',
+  none: 'none',
+} as const;
+
+type NotificationSettingKey = keyof typeof notificationSettings;
+type NotificationSettingValue =
+  (typeof notificationSettings)[NotificationSettingKey];
 
 type FormValues = {
-  type: NotificationType;
+  type: NotificationSettingValue;
 };
 
 export const RadioGroupForm = () => {
