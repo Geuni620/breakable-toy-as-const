@@ -1,6 +1,4 @@
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -14,18 +12,17 @@ import {
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { toast } from '@/components/ui/use-toast';
 
-const formSchema = z.object({
-  type: z.enum(['all', 'mentions', 'none'], {
-    required_error: 'Please select a type',
-  }),
-});
+const notificationTypes = ['all', 'mentions', 'none'] as const;
+type NotificationType = (typeof notificationTypes)[number];
+
+type FormValues = {
+  type: NotificationType;
+};
 
 export const RadioGroupForm = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-  });
+  const form = useForm<FormValues>();
 
-  const onSubmit = (data: z.infer<typeof formSchema>) => {
+  const onSubmit = (data: FormValues) => {
     toast({
       title: 'You submitted the following values:',
       description: (
